@@ -271,6 +271,7 @@ a.pure-button-primary {
   display: inline-block;
   width: 33%;
   float: right;
+  height: 500px;
 }
 
 #splashimage {
@@ -304,6 +305,7 @@ a.pure-button-primary {
   color: #2c3e50;
   text-decoration: none;
   transition: .6s color;
+  height: 100%;
 }
 
 .tableView a:hover{
@@ -327,6 +329,11 @@ a.pure-button-primary {
   height: 140px;
   float: left;
   display: inline-block;
+}
+
+.tableView {
+  height: 820px;
+  overflow-y: scroll;
 }
 
 .tableViewItemDetails {
