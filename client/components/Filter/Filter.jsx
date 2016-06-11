@@ -53,6 +53,7 @@ const Filter = (props) => (
 
           <div className="pure-u-1 pure-u-md-1">
             <input
+              type="button"
               name="clear-filters"
               onClick={props.handleClearFilters}
               className="pure-button"
