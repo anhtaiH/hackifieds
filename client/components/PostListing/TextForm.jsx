@@ -7,11 +7,11 @@ const TextForm = (props) => (
         <label htmlFor="owner-name"><h2>Owner Name</h2></label>
         <input
           id="owner-name"
+          name="ownerName"
           placeholder="Enter your name"
           className="pure-u-23-24"
           type="text"
-          value={props.ownerName}
-          onChange={props.handleOwnerNameChange}
+          onChange={props.handleChange}
           required
         />
       </div>
@@ -19,11 +19,11 @@ const TextForm = (props) => (
         <label htmlFor="owner-email"><h2>Owner Email</h2></label>
         <input
           id="owner-email"
+          name="ownerEmail"
           placeholder="Enter a valid email address"
           className="pure-u-23-24"
           type="email"
-          value={props.ownerEmail}
-          onChange={props.handleOwnerEmailChange}
+          onChange={props.handleChange}
           required
         />
       </div>
@@ -31,11 +31,11 @@ const TextForm = (props) => (
         <label htmlFor="address"><h2>Address</h2></label>
         <input
           id="address"
+          name="address"
           placeholder="E.g. 944 Market St, San Francisco, CA"
           className="pure-u-23-24"
           type="text"
-          value={props.address}
-          onChange={props.handleAddressChange}
+          onChange={props.handleChange}
           required
         />
       </div>
@@ -43,12 +43,12 @@ const TextForm = (props) => (
         <label htmlFor="price"><h2>Monthly Rent</h2></label>
         <input
           id="price"
+          name="price"
           placeholder="Enter a reasonable price"
           className="pure-u-23-24"
           type="number"
           min="0"
-          value={props.price}
-          onChange={props.handlePriceChange}
+          onChange={props.handleChange}
           required
         />
       </div>
@@ -56,13 +56,13 @@ const TextForm = (props) => (
         <label htmlFor="bathrooms"><h2>Bathrooms</h2></label>
         <input
           id="bathrooms"
+          name="bathrooms"
           placeholder="How many bathrooms are there?"
           className="pure-u-23-24"
           type="number"
           min="0"
           step="0.5"
-          value={props.bathrooms}
-          onChange={props.handleBathroomsChange}
+          onChange={props.handleChange}
           required
         />
       </div>
@@ -70,10 +70,10 @@ const TextForm = (props) => (
         <label htmlFor="Private"><h2>Check if Private</h2></label>
         <input
           id="Private"
+          name="private"
           className="pure-u-23-24"
           type="checkbox"
-          value={props.private}
-          onChange={props.handlePrivateChange}
+          onChange={props.handleChange}
         />
       </div>
       <div className="pure-u-1 pure-u-md-1-3">
@@ -84,11 +84,11 @@ const TextForm = (props) => (
           the ammenities, the people living there, atmosphere, nearby
           awesome places, etc..."
           id="Description"
+          name="description"
           rows="6"
           className="pure-u-23-24"
           type="text"
-          value={props.description}
-          onChange={props.handleDescriptionChange}
+          onChange={props.handleChange}
         />
       </div>
     </div>
@@ -96,21 +96,8 @@ const TextForm = (props) => (
 );
 
 TextForm.propTypes = {
-  ownerEmail: React.PropTypes.string,
-  ownerName: React.PropTypes.string,
-  price: React.PropTypes.string,
-  address: React.PropTypes.string,
-  bathrooms: React.PropTypes.string,
-  description: React.PropTypes.string,
-  private: React.PropTypes.bool,
-
-  handleOwnerEmailChange: React.PropTypes.func,
-  handlePriceChange: React.PropTypes.func,
-  handleAddressChange: React.PropTypes.func,
-  handleOwnerNameChange: React.PropTypes.func,
-  handleBathroomsChange: React.PropTypes.func,
+  handleChange: React.PropTypes.func,
   handlePrivateChange: React.PropTypes.func,
-  handleDescriptionChange: React.PropTypes.func,
 };
 
 export default TextForm;
