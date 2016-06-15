@@ -17,13 +17,13 @@ class MainContainer extends Component {
       .then(response => {
         _.each(response.data, (item) => {
           const listing = item;
+
           // Converts part of the listings back to valid javascript types
-          listing.pictures = listing.pictures ? JSON.parse(listing.pictures) : '';
-          listing.lat = listing.lat ? JSON.parse(listing.lat) : '';
-          listing.lng = listing.lng ? JSON.parse(listing.lng) : '';
+          listing.pictures = JSON.parse(listing.pictures);
+          listing.lat = JSON.parse(listing.lat);
+          listing.lng = JSON.parse(listing.lng);
           listing.price = JSON.parse(listing.price);
-          listing.distanceToHackReactor = listing.distanceToHackReactor ?
-            JSON.parse(listing.distanceToHackReactor) : '';
+          listing.distanceToHackReactor = JSON.parse(listing.distanceToHackReactor);
           listing.bathrooms = JSON.parse(listing.bathrooms);
         });
 

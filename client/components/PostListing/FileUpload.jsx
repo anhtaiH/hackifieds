@@ -11,9 +11,7 @@ class FileUpload extends React.Component {
 
   render() {
     return (
-      <div>
-        <div id="dropzone" className="dropzone"> </div>
-      </div>
+      <div id="dropzone" className="dropzone"> </div>
     );
   }
 }

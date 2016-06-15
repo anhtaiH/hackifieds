@@ -34,7 +34,7 @@ const sessionsReducer = (state = false, action) => {
 const formFieldsReducer = (state = {}, action) => {
   switch (action.type) {
     case 'UPDATE_FORM':
-      return Object.assign({}, state, action.update);
+      return Object.assign({}, state, action.updateForm);
 
     default:
       return state;

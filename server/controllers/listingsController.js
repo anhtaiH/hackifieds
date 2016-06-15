@@ -17,7 +17,6 @@ module.exports = {
     });
   },
   addListing: function addListing(req, res) {
-    console.log(req.body);
     sqldb.Listing.create({ userId: req.user.id, address: req.body.address, price: req.body.price,
       bathrooms: req.body.bathrooms, private: JSON.parse(req.body.private),
       ownerEmail: req.body.ownerEmail, ownerName: req.body.ownerName,
@@ -32,7 +31,6 @@ module.exports = {
       });
   },
   getListing: function getListing(listingId, callback) {
-    console.log(listingId);
     sqldb.Listing.findOne({ where: { listingId } })
       .then((listing) => {
         callback(null, listing.dataValues);
