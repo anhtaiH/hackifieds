@@ -16,6 +16,7 @@ module.exports = {
       res.end('error');
     });
   },
+
   addListing: function addListing(req, res) {
     sqldb.Listing.create({ userId: req.user.id, address: req.body.address, price: req.body.price,
       bathrooms: req.body.bathrooms, private: JSON.parse(req.body.private),
@@ -30,6 +31,7 @@ module.exports = {
         res.end('error');
       });
   },
+
   getListing: function getListing(listingId, callback) {
     sqldb.Listing.findOne({ where: { listingId } })
       .then((listing) => {
@@ -39,6 +41,7 @@ module.exports = {
         callback(error);
       });
   },
+
   updateListing: function updateListing(listingId, lat, lng, distanceToHackReactor, callback) {
     sqldb.Listing.update(
       { lat, lng, distanceToHackReactor },
