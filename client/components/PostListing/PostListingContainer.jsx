@@ -1,121 +1,57 @@
 import React from 'react';
 import FileUpload from './FileUpload.jsx';
 import TextForm from './TextForm.jsx';
-
 import request from 'superagent';
+import store from '../../redux/store';
+import actions from '../../redux/actions';
 
-class AddListing extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      address: '',
-      price: '',
-      bathrooms: '',
-      private: false,
-      ownerName: '',
-      ownerEmail: '',
-      description: '',
-      pictures: [],
-    };
+const formState = store.getState().formFields;
 
-    this.handleFileChange = this.handleFileChange.bind(this);
+const handleFileChange = (fileName) => {
+  const newPictures = formState.pictures;
+  newPictures.push(fileName);
+  store.dispatch(actions.updateForm({ pictures: newPictures }));
+};
 
-    this.handleAddressChange = this.handleAddressChange.bind(this);
-    this.handlePriceChange = this.handlePriceChange.bind(this);
-    this.handleBathroomsChange = this.handleBathroomsChange.bind(this);
-    this.handlePrivateChange = this.handlePrivateChange.bind(this);
+const handlePrivateChange = (event) => {
+  store.dispatch(actions.updateForm({ private: event.target.checked }));
+};
 
-    this.handleOwnerNameChange = this.handleOwnerNameChange.bind(this);
-    this.handleOwnerEmailChange = this.handleOwnerEmailChange.bind(this);
+const handleChange = (event) => {
+  formState[event.target.name] = event.target.value;
+  store.dispatch(actions.updateForm(formState));
+};
 
-    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+const handleSubmitForm = () => {
+  formState.pictures = JSON.stringify(formState.pictures);
+  request
+    .post('/api/listings')
+    .type('form')
+    .send(formState)
+    .end((err) => {
+      if (err) {
+        throw err;
+      }
+    });
+};
 
-    this.handleSubmitForm = this.handleSubmitForm.bind(this);
-  }
-
-  handleFileChange(fileName) {
-    const newPictures = this.state.pictures;
-    newPictures.push(fileName);
-    this.setState({ pictures: newPictures });
-  }
-
-  handleAddressChange(event) {
-    this.setState({ address: event.target.value });
-  }
-
-  handlePriceChange(event) {
-    this.setState({ price: event.target.value });
-  }
-
-  handleBathroomsChange(event) {
-    this.setState({ bathrooms: event.target.value });
-  }
-
-  handlePrivateChange(event) {
-    this.setState({ private: event.target.checked });
-  }
-
-  handleOwnerNameChange(event) {
-    this.setState({ ownerName: event.target.value });
-  }
-
-  handleOwnerEmailChange(event) {
-    this.setState({ ownerEmail: event.target.value });
-  }
-
-  handleDescriptionChange(event) {
-    this.setState({ description: event.target.value });
-  }
-
-  handleSubmitForm() {
-    request
-      .post('/api/listings')
-      .type('form')
-      .send({ address: this.state.address })
-      .send({ price: this.state.price })
-      .send({ bathrooms: this.state.bathrooms })
-      .send({ private: this.state.private })
-      .send({ ownerName: this.state.ownerName })
-      .send({ ownerEmail: this.state.ownerEmail })
-      .send({ description: this.state.description })
-      .send({ pictures: JSON.stringify(this.state.pictures) })
-      .end((err, res) => {
-      });
-  }
-
-  render() {
-    return (<div>
-      <form className="pure-form pure-form-stacked">
-        <fieldset>
-          <legend>Add Listing</legend>
-          <FileUpload handleFile={this.handleFileChange} />
-          <TextForm
-            address={this.state.address}
-            price={this.state.price}
-            bathrooms={this.state.bathrooms}
-            private={this.state.private}
-            ownerName={this.state.ownerName}
-            ownerEmail={this.state.ownerEmail}
-            description={this.state.description}
-
-            handleAddressChange={this.handleAddressChange}
-            handlePriceChange={this.handlePriceChange}
-            handleBathroomsChange={this.handleBathroomsChange}
-            handlePrivateChange={this.handlePrivateChange}
-            handleOwnerNameChange={this.handleOwnerNameChange}
-            handleOwnerEmailChange={this.handleOwnerEmailChange}
-            handleDescriptionChange={this.handleDescriptionChange}
-
-            pictures={this.state.pictures}
-          />
-          <button
-            onClick={this.handleSubmitForm}
-            className="pure-button pure-button-primary button-xlarge button-success"
-          >Post</button>
-        </fieldset>
-      </form>
-    </div>);
-  }
-}
+const AddListing = () => (
+  <div>
+    <form className="pure-form pure-form-stacked">
+      <fieldset>
+        <legend>Add Listing</legend>
+        <FileUpload handleFile={handleFileChange} />
+        <TextForm
+          handleChange={handleChange}
+          handlePrivateChange={handlePrivateChange}
+        />
+        <button
+          onClick={handleSubmitForm}
+          className="pure-button pure-button-primary button-xlarge button-success"
+        >Post</button>
+      </fieldset>
+    </form>
+  </div>
+);
 
 export default AddListing;

@@ -8,6 +8,16 @@ const initialState = {
   listings: {},
   filteredListings: {},
   isAuthenticated: false,
+  formFields: {
+    address: '',
+    price: '',
+    bathrooms: '',
+    private: false,
+    ownerName: '',
+    ownerEmail: '',
+    description: '',
+    pictures: [],
+  },
 };
 
 const store = createStore(reducers, initialState);
