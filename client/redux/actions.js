@@ -9,7 +9,6 @@ const actions = {
   },
 
   setListings(listings) {
-    // console.log('actions.js setListings() ==>', listings);
     return {
       type: 'SET_LISTINGS',
       listings,
@@ -17,10 +16,16 @@ const actions = {
   },
 
   setFilteredListings(filteredListings) {
-    // console.log('actions.js setFilteredListings() ==>', filteredListings);
     return {
       type: 'SET_FILTERED_LISTINGS',
       filteredListings,
+    };
+  },
+
+  updateForm(userInput) {
+    return {
+      type: 'UPDATE_FORM',
+      userInput,
     };
   },
 

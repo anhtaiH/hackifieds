@@ -8,6 +8,7 @@ const initialState = {
   listings: {},
   filteredListings: {},
   isAuthenticated: false,
+  formFields: {},
 };
 
 const store = createStore(reducers, initialState);

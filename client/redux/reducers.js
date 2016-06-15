@@ -24,9 +24,17 @@ const filteredListingsReducer = (state = {}, action) => {
 const sessionsReducer = (state = false, action) => {
   switch (action.type) {
     case 'AUTHENTICATE':
-      console.log('Current state ==:>', state);
-      console.log('Sessions State should be changed to true ==:>', action.isAuthenticate);
       return action.isAuthenticate;
+
+    default:
+      return state;
+  }
+};
+
+const formFieldsReducer = (state = {}, action) => {
+  switch (action.type) {
+    case 'UPDATE_FORM':
+      return Object.assign({}, state, action.update);
 
     default:
       return state;
@@ -39,6 +47,7 @@ const rootReducer = combineReducers(
     listings: listingsReducer,
     routing: routerReducer,
     isAuthenticated: sessionsReducer,
+    formFields: formFieldsReducer,
   }
 );
 
