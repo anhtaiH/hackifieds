@@ -103,19 +103,25 @@ class Maps extends Component {
             {Object.keys(this.props.markers).map((listingId, index) => {
               const marker = this.props.markers[listingId];
               const ref = `marker_${index}`;
-              return (
-                <Marker
-                  {...marker}
-                  position={
-                    { lat: marker.lat, lng: marker.lng }
-                  }
-                  key={listingId}
-                  ref={ref}
-                  onClick={this.handleMarkerClick.bind(this, marker)}
-                >
-                  {marker.showInfo ? this.renderInfoWindow(ref, marker) : null}
-                </Marker>
-              );
+              let renderMarker;
+              if (marker.lat && marker.distanceToHackReactor) {
+                renderMarker = (
+                  <Marker
+                    {...marker}
+                    position={
+                      { lat: marker.lat, lng: marker.lng }
+                    }
+                    key={listingId}
+                    ref={ref}
+                    onClick={this.handleMarkerClick.bind(this, marker)}
+                  >
+                    {marker.showInfo ? this.renderInfoWindow(ref, marker) : null}
+                  </Marker>
+                );
+              } else {
+                renderMarker = '';
+              }
+              return renderMarker;
             })}
           </GoogleMap>
         }
