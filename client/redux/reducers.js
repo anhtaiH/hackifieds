@@ -41,6 +41,15 @@ const formFieldsReducer = (state = {}, action) => {
   }
 };
 
+const optionsReducer = (state = {}, action) => {
+  switch (action.type) {
+    case 'UPDATE_OPTIONS':
+      return Object.assign({}, state, action.options);
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers(
   {
     filteredListings: filteredListingsReducer,
@@ -48,6 +57,7 @@ const rootReducer = combineReducers(
     routing: routerReducer,
     isAuthenticated: sessionsReducer,
     formFields: formFieldsReducer,
+    options: optionsReducer,
   }
 );
 

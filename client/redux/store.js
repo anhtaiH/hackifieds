@@ -18,6 +18,11 @@ const initialState = {
     description: '',
     pictures: [],
   },
+  options: {
+    price: 2000,
+    private: false,
+    distance: 8,
+  },
 };
 
 const store = createStore(reducers, initialState);

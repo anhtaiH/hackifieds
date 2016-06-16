@@ -3,7 +3,7 @@ import React from 'react';
 const Filter = (props) => (
   <div>
     <br /><br />
-    <form className="pure-form pure-form-stacked" onChange={props.handleFormChange}>
+    <form className="pure-form pure-form-stacked">
       <fieldset>
 
         <legend className="is-center">
@@ -16,7 +16,7 @@ const Filter = (props) => (
             <input
               type="text"
               name="price"
-              onChange={props.handlePriceChange}
+              onChange={props.handleFilterChange}
               className="pure-u-23-24"
               value={props.options.price}
             />
@@ -29,8 +29,8 @@ const Filter = (props) => (
 
             <input
               type="text"
-              name="price"
-              onChange={props.handleDistanceChange}
+              name="distance"
+              onChange={props.handleFilterChange}
               className="pure-u-23-24"
               value={props.options.distance}
             />
@@ -44,7 +44,7 @@ const Filter = (props) => (
               id="private"
               type="checkbox"
               name="private"
-              onChange={props.handlePrivateChange}
+              onChange={props.handleFilterChange}
               className="pure-u-23-24 pure-checkbox"
               value={props.options.private}
             />
@@ -72,10 +72,7 @@ Filter.propTypes = {
   options: React.PropTypes.object,
   private: React.PropTypes.bool,
   price: React.PropTypes.string,
-  handlePrivateChange: React.PropTypes.func,
-  handlePriceChange: React.PropTypes.func,
-  handleFormChange: React.PropTypes.func,
-  handleDistanceChange: React.PropTypes.func,
+  handleFilterChange: React.PropTypes.func,
   handleClearFilters: React.PropTypes.func,
 };
 

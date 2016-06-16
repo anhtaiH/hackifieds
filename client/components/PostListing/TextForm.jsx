@@ -97,7 +97,6 @@ const TextForm = (props) => (
 
 TextForm.propTypes = {
   handleChange: React.PropTypes.func,
-  handlePrivateChange: React.PropTypes.func,
 };
 
 export default TextForm;
