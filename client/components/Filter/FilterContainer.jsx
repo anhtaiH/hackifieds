@@ -1,95 +1,37 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import actions from '../../redux/actions';
 import store from '../../redux/store';
 import Filter from './Filter.jsx';
 
-class FilterContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      options: {
-        private: false,
-        price: 2000,
-        distance: 5,
-      },
-    };
-    this.handlePrivateChange = this.handlePrivateChange.bind(this);
-    this.handlePriceChange = this.handlePriceChange.bind(this);
-    this.handleFormChange = this.handleFormChange.bind(this);
-    this.handleDistanceChange = this.handleDistanceChange.bind(this);
-    this.handleClearFilters = this.handleClearFilters.bind(this);
-  }
-
-  handlePrivateChange(e) {
-    this.setState({
-      options: {
-        private: e.target.checked,
-        price: this.state.options.price,
-        distance: this.state.options.distance,
-      },
-    });
-  }
-
-  handlePriceChange(e) {
-    this.setState({
-      options: {
-        private: this.state.options.private,
-        price: +e.target.value,
-        distance: this.state.options.distance,
-      },
-    });
-  }
-
-  handleDistanceChange(e) {
-    this.setState({
-      options: {
-        private: this.state.options.private,
-        price: this.state.options.price,
-        distance: +e.target.value,
-      },
-    });
-  }
-
-  handleClearFilters(e) {
-    console.log('activate handle clear filters');
-    e.preventDefault();
-    store.dispatch(actions.setFilteredListings(this.props.listings));
-  }
-
-  handleFormChange() {
-    setTimeout(() => {
-      this.props.updateFilter(this.state.options, this.props.listings);
-    }, 100);
-  }
-
-  render() {
-    return (
-      <Filter
-        {...this.props}
-        handlePrivateChange={this.handlePrivateChange}
-        handlePriceChange={this.handlePriceChange}
-        handleFormChange={this.handleFormChange}
-        handleClearFilters={this.handleClearFilters}
-        handleDistanceChange={this.handleDistanceChange}
-
-        options={this.state.options}
-      />
-    );
-  }
-}
+const FilterContainer = (props) => (
+  <Filter
+    {...props}
+  />
+);
 
 const mapStateToProps = function mapStateToProps(state) {
   return {
     filteredListings: state.filteredListings,
     listings: state.listings,
+    options: state.options,
   };
 };
 
 const mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  const listings = store.getState().listings;
+  const options = store.getState().options;
+
   return {
-    updateFilter(options, listings) {
+    handleFilterChange(e) {
+      const isNamePrivate = e.target.name === 'private';
+      options[e.target.name] = isNamePrivate ? e.target.checked : +e.target.value;
       dispatch(actions.updateFilteredListings(options, listings));
+    },
+
+    handleClearFilters(e) {
+      e.preventDefault();
+      dispatch(actions.setFilteredListings(listings));
     },
   };
 };

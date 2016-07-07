@@ -29,6 +29,13 @@ const actions = {
     };
   },
 
+  updateOptions(options) {
+    return {
+      type: 'UPDATE_OPTIONS',
+      options,
+    };
+  },
+
   updateFilteredListings(options, listings) {
     // filter all the listings based on options
     const filteredListings = _.reduce(listings, (acc, curr, key) => {

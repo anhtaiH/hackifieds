@@ -9,13 +9,13 @@ const ListingDetail = (props) => (
   <div>
     <div id="container "className="photobanner pure-g">
         {props.listing.pictures.map((image, index) => (
-          index === 0 ? 
+          index === 0 ?
           <img
             src={'/images/'+image}
             key={index}
             alt
             className="first img-resize  u-med-1-2 u-lrg-1-3"
-          /> : 
+          /> :
           <img
             src={'/images/'+image}
             key={index}

@@ -5,23 +5,18 @@ const Sidebar = (props) => (
   <div className="tableView">
     <ul>
       {Object.keys(props.filteredListings).map((listingId) => {
-        let entry;
-        if (props.filteredListings[listingId].lat &&
-          props.filteredListings[listingId].distanceToHackReactor
-        ) {
-          entry = (
-            <div>
-              <SidebarEntry key={listingId} listing={props.filteredListings[listingId]} />
-              <br />
-            </div>
-          );
-        } else {
-          entry = ' ';
-        }
-
-        return (
-          entry
+        const entry = (
+          <div>
+            <SidebarEntry key={listingId} listing={props.filteredListings[listingId]} />
+            <br />
+          </div>
         );
+
+        const hasCoordinates = props.filteredListings[listingId].lat &&
+          props.filteredListings[listingId].distanceToHackReactor;
+
+        // Only render the entry if it has the distance
+        return hasCoordinates ? entry : ' ';
       }
       )}
     </ul>
