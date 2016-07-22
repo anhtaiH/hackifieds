@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const db = new Sequelize('HackBnB', 'root', 'password');
+const db = new Sequelize('HackBnB', 'root', '');
 
 // Listing model
 const Listing = db.define('Listing', {
